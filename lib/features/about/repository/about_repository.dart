@@ -1,0 +1,3 @@
+class AboutRepository {
+  AboutRepository();
+}
