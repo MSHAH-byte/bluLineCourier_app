@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/constants/app_constants.dart';
 import '../../../core/constants/route_constants.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
@@ -20,38 +21,43 @@ class AppDrawer extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                'BluLine Courier',
+                AppConstants.appName,
                 style: AppTextStyles.h2.copyWith(color: AppColors.primaryAccent),
               ),
             ),
           ),
-          _DrawerTile(
+          const _DrawerTile(
             title: 'Home',
             icon: Icons.home_outlined,
             routeName: RouteConstants.homeName,
           ),
-          _DrawerTile(
+          const _DrawerTile(
             title: 'About',
             icon: Icons.info_outline,
             routeName: RouteConstants.aboutName,
           ),
-          _DrawerTile(
+          const _DrawerTile(
             title: 'Services',
             icon: Icons.local_shipping_outlined,
             routeName: RouteConstants.servicesName,
           ),
-          _DrawerTile(
+          const _DrawerTile(
+            title: 'Service Area',
+            icon: Icons.map_outlined,
+            routeName: RouteConstants.serviceAreaName,
+          ),
+          const _DrawerTile(
             title: 'Tracking',
             icon: Icons.location_on_outlined,
             routeName: RouteConstants.trackingName,
           ),
-          _DrawerTile(
+          const _DrawerTile(
             title: 'Contact',
             icon: Icons.contact_support_outlined,
             routeName: RouteConstants.contactName,
           ),
           const Spacer(),
-          _DrawerTile(
+          const _DrawerTile(
             title: 'Account',
             icon: Icons.person_outline,
             routeName: RouteConstants.accountName,
@@ -76,7 +82,8 @@ class _DrawerTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isSelected = GoRouterState.of(context).name == routeName;
+    final String? currentName = GoRouterState.of(context).name;
+    final bool isSelected = currentName == routeName;
 
     return ListTile(
       leading: Icon(
@@ -85,10 +92,9 @@ class _DrawerTile extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: AppTextStyles.body.copyWith(
-          color: isSelected ? AppColors.primaryAccent : AppColors.textPrimary,
-          fontWeight: isSelected ? FontWeight.bold : FontWeight.regular,
-        ),
+        style: isSelected
+            ? AppTextStyles.bodyAccent.copyWith(fontWeight: FontWeight.w700)
+            : AppTextStyles.body,
       ),
       selected: isSelected,
       onTap: () {

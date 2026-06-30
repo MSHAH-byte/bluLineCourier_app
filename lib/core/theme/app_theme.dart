@@ -18,12 +18,10 @@ class AppTheme {
         primary: AppColors.primaryAccent,
         secondary: AppColors.interactiveBlue,
         surface: AppColors.surface,
-        background: AppColors.primaryBackground,
         error: AppColors.error,
         onPrimary: AppColors.primaryBackground,
         onSecondary: Colors.white,
         onSurface: AppColors.textPrimary,
-        onBackground: AppColors.textPrimary,
         onError: Colors.white,
       ),
 
@@ -89,7 +87,7 @@ class AppTheme {
         hintStyle: AppTextStyles.caption.copyWith(color: AppColors.textDisabled),
       ),
 
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: AppColors.secondaryBackground,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppRadius.medium),
@@ -151,7 +149,5 @@ class AppTheme {
   // Providing light theme as well, though SDS emphasizes dark premium interface
   static ThemeData get light => dark.copyWith(
         brightness: Brightness.light,
-        // In a real scenario, we'd define specific light colors if requested.
-        // For now, focusing on the SDS "Dark premium interface".
       );
 }

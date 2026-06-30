@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/constants/responsive_breakpoints.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../core/theme/app_text_styles.dart';
 
@@ -19,37 +20,58 @@ class HeroSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDesktop = MediaQuery.of(context).size.width > ResponsiveBreakpoints.tablet;
+
     return Container(
-      padding: const EdgeInsets.symmetric(
+      padding: EdgeInsets.symmetric(
         horizontal: AppSpacing.lg,
-        vertical: AppSpacing.xxl,
+        vertical: isDesktop ? AppSpacing.section : AppSpacing.xxl,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: AppTextStyles.display,
-          ),
-          if (subtitle != null) ...[
-            const SizedBox(height: AppSpacing.md),
-            Text(
-              subtitle!,
-              style: AppTextStyles.bodyLarge.copyWith(
-                color: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.8),
-              ),
+      child: isDesktop
+          ? Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: _buildContent(context),
+                  ),
+                ),
+                if (image != null) ...[
+                  const SizedBox(width: AppSpacing.xxl),
+                  Expanded(child: image!),
+                ],
+              ],
+            )
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ..._buildContent(context),
+                if (image != null) ...[
+                  const SizedBox(height: AppSpacing.xxl),
+                  image!,
+                ],
+              ],
             ),
-          ],
-          if (action != null) ...[
-            const SizedBox(height: AppSpacing.lg),
-            action!,
-          ],
-          if (image != null) ...[
-            const SizedBox(height: AppSpacing.xxl),
-            image!,
-          ],
-        ],
-      ),
     );
+  }
+
+  List<Widget> _buildContent(BuildContext context) {
+    return [
+      Text(
+        title,
+        style: AppTextStyles.display,
+      ),
+      if (subtitle != null) ...[
+        const SizedBox(height: AppSpacing.md),
+        Text(
+          subtitle!,
+          style: AppTextStyles.bodyLargeMuted,
+        ),
+      ],
+      if (action != null) ...[
+        const SizedBox(height: AppSpacing.lg),
+        action!,
+      ],
+    ];
   }
 }

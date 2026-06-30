@@ -33,7 +33,8 @@ class AppDropdown<T> extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         DropdownButtonFormField<T>(
-          value: value,
+          // Following the latest Flutter FormField pattern
+          initialValue: value,
           items: items,
           onChanged: onChanged,
           validator: validator,
@@ -44,7 +45,8 @@ class AppDropdown<T> extends StatelessWidget {
             hintText: hintText,
             filled: true,
             fillColor: AppColors.surface,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppRadius.medium),
               borderSide: BorderSide.none,
@@ -55,7 +57,8 @@ class AppDropdown<T> extends StatelessWidget {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppRadius.medium),
-              borderSide: const BorderSide(color: AppColors.primaryAccent, width: 1),
+              borderSide:
+                  const BorderSide(color: AppColors.primaryAccent, width: 1),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppRadius.medium),

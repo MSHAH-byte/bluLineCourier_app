@@ -29,7 +29,11 @@ class SectionHeading extends StatelessWidget {
           Text(
             subtitle!,
             style: AppTextStyles.body.copyWith(
-              color: Theme.of(context).textTheme.bodySmall?.color?.withOpacity(0.7),
+              color: Theme.of(context)
+                  .textTheme
+                  .bodySmall
+                  ?.color
+                  ?.withValues(alpha: 0.7),
             ),
           ),
         ],

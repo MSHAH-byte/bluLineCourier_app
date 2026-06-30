@@ -21,9 +21,12 @@ class SecondaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double buttonHeight = 56.0;
+    const double iconSize = 20.0;
+
     return SizedBox(
       width: width ?? double.infinity,
-      height: 56,
+      height: buttonHeight,
       child: OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
@@ -37,7 +40,7 @@ class SecondaryButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (icon != null) ...[
-              Icon(icon, size: 20),
+              Icon(icon, size: iconSize),
               const SizedBox(width: AppSpacing.sm),
             ],
             Text(

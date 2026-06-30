@@ -23,9 +23,13 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double buttonHeight = 56.0;
+    const double loaderSize = 24.0;
+    const double iconSize = 20.0;
+
     return SizedBox(
       width: width ?? double.infinity,
-      height: 56, // Large touch target as per design philosophy
+      height: buttonHeight,
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
@@ -38,18 +42,19 @@ class PrimaryButton extends StatelessWidget {
         ),
         child: isLoading
             ? const SizedBox(
-                height: 24,
-                width: 24,
+                height: loaderSize,
+                width: loaderSize,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(AppColors.primaryBackground),
+                  valueColor:
+                      AlwaysStoppedAnimation<Color>(AppColors.primaryBackground),
                 ),
               )
             : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   if (icon != null) ...[
-                    Icon(icon, size: 20),
+                    Icon(icon, size: iconSize),
                     const SizedBox(width: AppSpacing.sm),
                   ],
                   Text(
