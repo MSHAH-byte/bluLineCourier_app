@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../core/constants/route_constants.dart';
 import '../features/splash/presentation/splash_screen.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/about/presentation/about_screen.dart';
@@ -10,45 +11,46 @@ import '../features/contact/presentation/contact_screen.dart';
 import '../features/account/presentation/account_screen.dart';
 
 final router = GoRouter(
-  initialLocation: '/',
+  initialLocation: RouteConstants.splashPath,
   routes: [
     GoRoute(
-      path: '/',
+      path: RouteConstants.splashPath,
+      name: RouteConstants.splashName,
       builder: (context, state) => const SplashScreen(),
     ),
     GoRoute(
-      path: '/home',
-      name: 'home',
+      path: RouteConstants.homePath,
+      name: RouteConstants.homeName,
       builder: (context, state) => const HomeScreen(),
     ),
     GoRoute(
-      path: '/about',
-      name: 'about',
+      path: RouteConstants.aboutPath,
+      name: RouteConstants.aboutName,
       builder: (context, state) => const AboutScreen(),
     ),
     GoRoute(
-      path: '/services',
-      name: 'services',
+      path: RouteConstants.servicesPath,
+      name: RouteConstants.servicesName,
       builder: (context, state) => const ServicesScreen(),
     ),
     GoRoute(
-      path: '/service-area',
-      name: 'service-area',
+      path: RouteConstants.serviceAreaPath,
+      name: RouteConstants.serviceAreaName,
       builder: (context, state) => const ServiceAreaScreen(),
     ),
     GoRoute(
-      path: '/tracking',
-      name: 'tracking',
+      path: RouteConstants.trackingPath,
+      name: RouteConstants.trackingName,
       builder: (context, state) => const TrackingScreen(),
     ),
     GoRoute(
-      path: '/contact',
-      name: 'contact',
+      path: RouteConstants.contactPath,
+      name: RouteConstants.contactName,
       builder: (context, state) => const ContactScreen(),
     ),
     GoRoute(
-      path: '/account',
-      name: 'account',
+      path: RouteConstants.accountPath,
+      name: RouteConstants.accountName,
       builder: (context, state) => const AccountScreen(),
     ),
   ],

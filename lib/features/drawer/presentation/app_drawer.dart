@@ -1,14 +1,100 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import '../../../core/constants/route_constants.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_text_styles.dart';
 
+/// The reusable application drawer for navigation.
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Drawer(
-      child: Center(
-        child: Text('App Drawer'),
+    return Drawer(
+      backgroundColor: AppColors.secondaryBackground,
+      child: Column(
+        children: [
+          DrawerHeader(
+            decoration: const BoxDecoration(
+              color: AppColors.primaryBackground,
+            ),
+            child: Center(
+              child: Text(
+                'BluLine Courier',
+                style: AppTextStyles.h2.copyWith(color: AppColors.primaryAccent),
+              ),
+            ),
+          ),
+          _DrawerTile(
+            title: 'Home',
+            icon: Icons.home_outlined,
+            routeName: RouteConstants.homeName,
+          ),
+          _DrawerTile(
+            title: 'About',
+            icon: Icons.info_outline,
+            routeName: RouteConstants.aboutName,
+          ),
+          _DrawerTile(
+            title: 'Services',
+            icon: Icons.local_shipping_outlined,
+            routeName: RouteConstants.servicesName,
+          ),
+          _DrawerTile(
+            title: 'Tracking',
+            icon: Icons.location_on_outlined,
+            routeName: RouteConstants.trackingName,
+          ),
+          _DrawerTile(
+            title: 'Contact',
+            icon: Icons.contact_support_outlined,
+            routeName: RouteConstants.contactName,
+          ),
+          const Spacer(),
+          _DrawerTile(
+            title: 'Account',
+            icon: Icons.person_outline,
+            routeName: RouteConstants.accountName,
+          ),
+          const SizedBox(height: 16),
+        ],
       ),
+    );
+  }
+}
+
+class _DrawerTile extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  final String routeName;
+
+  const _DrawerTile({
+    required this.title,
+    required this.icon,
+    required this.routeName,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final bool isSelected = GoRouterState.of(context).name == routeName;
+
+    return ListTile(
+      leading: Icon(
+        icon,
+        color: isSelected ? AppColors.primaryAccent : AppColors.textSecondary,
+      ),
+      title: Text(
+        title,
+        style: AppTextStyles.body.copyWith(
+          color: isSelected ? AppColors.primaryAccent : AppColors.textPrimary,
+          fontWeight: isSelected ? FontWeight.bold : FontWeight.regular,
+        ),
+      ),
+      selected: isSelected,
+      onTap: () {
+        context.goNamed(routeName);
+        Navigator.pop(context); // Close drawer
+      },
     );
   }
 }

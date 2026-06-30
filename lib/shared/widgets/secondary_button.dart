@@ -1,10 +1,52 @@
 import 'package:flutter/material.dart';
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_radius.dart';
+import '../../core/theme/app_spacing.dart';
+import '../../core/theme/app_text_styles.dart';
 
+/// A production-ready secondary button following the design system.
 class SecondaryButton extends StatelessWidget {
-  const SecondaryButton({super.key});
+  final String text;
+  final VoidCallback? onPressed;
+  final IconData? icon;
+  final double? width;
+
+  const SecondaryButton({
+    super.key,
+    required this.text,
+    this.onPressed,
+    this.icon,
+    this.width,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox.shrink();
+    return SizedBox(
+      width: width ?? double.infinity,
+      height: 56,
+      child: OutlinedButton(
+        onPressed: onPressed,
+        style: OutlinedButton.styleFrom(
+          foregroundColor: AppColors.textPrimary,
+          side: const BorderSide(color: AppColors.textPrimary),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppRadius.medium),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (icon != null) ...[
+              Icon(icon, size: 20),
+              const SizedBox(width: AppSpacing.sm),
+            ],
+            Text(
+              text,
+              style: AppTextStyles.button,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
